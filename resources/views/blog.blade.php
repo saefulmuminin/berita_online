@@ -1,6 +1,7 @@
 @extends('layout.main')
+
 @section('container')
-    <h2 class="text-center mb-3">halaman :blog</h2>
+    <h2 class="text-center mb-3">{{ $title }}</h2>
     <div class="row ">
         @foreach ($post as $pos)
             <div class="col-sm-4 col-12">
@@ -21,7 +22,7 @@
                     </div>
                     <div class="card-body text-dark">
                         <h5 class="card-title">
-                            <h4 class="font-italic text-bold">{{ $pos->autor }}</h4>
+                            <h4 class="font-italic text-bold">{{ $pos->user->name }}</h4>
                         </h5>
                         <p class="card-text">{{ $pos->excerpt }}</p>
                         <a href="/post/{{ $pos->slug }}"> Read more</a>

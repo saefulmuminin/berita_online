@@ -11,25 +11,25 @@ class PostController extends Controller
     public function index()
     {
         return view('blog', [
-            'title' => 'blog',
+            'title' => 'all  blog',
             // 'post' => post::all()
-            'post' => post::latest()->get()
+            'post' => post::with(['user', 'category'])->latest()->get()
         ]);
     }
     public function show(post $post)
     {
         return view('post', [
-            'title' => 'post',
+            'title' => 'single post',
             'post' => $post
         ]);
     }
     public function authorPosts(User $user)
     {
-        $posts = $user->posts()->get();
+        $post = $user->posts()->get();
 
-        return view('author', [
-            'title' => 'Author Posts',
-            'posts' => $posts,
+        return view('blog', [
+            'title' => "Post By Author: $user->name",
+            'post' => $post->load('category', 'user'),
             'author' => $user
         ]);
     }

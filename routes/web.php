@@ -50,11 +50,11 @@ Route::get('/categories', function () {
     ]);
 });
 Route::get('/categories/{category:slug}', function (Category $category) {
-    return view('category', [
-        'title' => $category->name,
-        'post' => $category->post,
-        'category' => $category->name,
+    return view('blog', [
+        'title' => "Post By Category: $category->name",
+        'post' => $category->post->load('category', 'user'),
     ]);
 });
+
 Route::get('/author/{user:username}', [PostController::class, 'authorPosts'])->name('author.posts');
 Route::get('/post/{slug}', [PostController::class, 'show'])->name('post.show');
